@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 20 - Student Registration</title>
+</head>
+<body>
+
+<h2>Student Registration Form</h2>
+
+<form method="POST">
+
+    <label>Name:</label><br>
+    <input type="text" name="name"><br><br>
+
+    <label>Email:</label><br>
+    <input type="text" name="email"><br><br>
+
+    <label>Gender:</label><br>
+    <input type="radio" name="gender" value="Male"> Male
+    <input type="radio" name="gender" value="Female"> Female<br><br>
+
+    <label>Course:</label><br>
+    <select name="course">
+        <option value="">Select</option>
+        <option value="BSIT">BSIT</option>
+        <option value="BSCS">BSCS</option>
+        <option value="BSIS">BSIS</option>
+    </select><br><br>
+
+    <label>Hobbies:</label><br>
+    <input type="checkbox" name="hobbies[]" value="Reading"> Reading
+    <input type="checkbox" name="hobbies[]" value="Gaming"> Gaming
+    <input type="checkbox" name="hobbies[]" value="Music"> Music<br><br>
+
+    <label>Message:</label><br>
+    <textarea name="message"></textarea><br><br>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+<hr>
+
+<?php
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // sanitize
+    $name = htmlspecialchars($_POST["name"] ?? "");
+    $email = htmlspecialchars($_POST["email"] ?? "");
+    $gender = $_POST["gender"] ?? "";
+    $course = $_POST["course"] ?? "";
+    $message = htmlspecialchars($_POST["message"] ?? "");
+
+    $hobbies = $_POST["hobbies"] ?? [];
+
+    $errors = [];
+
+    // validation
+    if (empty($name)) $errors[] = "Name is required.";
+    if (empty($email)) $errors[] = "Email is required.";
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Invalid email.";
+    if (empty($gender)) $errors[] = "Gender is required.";
+    if (empty($course)) $errors[] = "Course is required.";
+    if (empty($message)) $errors[] = "Message is required.";
+
+    if (!empty($errors)) {
+
+        echo "<h3>Errors:</h3>";
+        foreach ($errors as $err) {
+            echo "• " . $err . "<br>";
+        }
+
+    } else {
+
+        echo "<h3>Registration Details</h3>";
+        echo "Name: $name <br>";
+        echo "Email: $email <br>";
+        echo "Gender: $gender <br>";
+        echo "Course: $course <br>";
+
+        echo "Hobbies: ";
+        if (!empty($hobbies)) {
+            echo implode(", ", $hobbies);
+        } else {
+            echo "None";
+        }
+
+        echo "<br>Message: $message <br>";
+    }
+}
+
+?>
+
+</body>
+</html>
