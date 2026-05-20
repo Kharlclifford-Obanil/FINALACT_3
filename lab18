@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>GET Method</h2>
+
+<form method="GET">
+    <label>Name:</label><br>
+    <input type="text" name="name"><br><br>
+    <button type="submit">Submit GET</button>
+</form>
+
+<hr>
+
+<h2>POST Method</h2>
+
+<form method="POST">
+    <label>Name:</label><br>
+    <input type="text" name="pname"><br><br>
+    <button type="submit">Submit POST</button>
+</form>
+
+<hr>
+
+<?php
+
+// GET output
+if (isset($_GET["name"])) {
+    echo "<h3>GET Result</h3>";
+    echo "Name: " . htmlspecialchars($_GET["name"]) . "<br>";
+    echo "URL shows data in address bar.";
+}
+
+// POST output
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    echo "<h3>POST Result</h3>";
+    echo "Name: " . htmlspecialchars($_POST["pname"]) . "<br>";
+    echo "Data is hidden from URL.";
+}
+
+?>
+
+</body>
+</html>
