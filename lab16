@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="POST">
+    <label>Age:</label><br>
+    <input type="number" name="age"><br><br>
+    <button type="submit">Submit</button>
+</form>
+
+<hr>
+
+<?php
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $age = $_POST["age"] ?? "";
+
+    if ($age == "") {
+        echo "Please enter your age.";
+    } elseif ($age < 1 || $age > 100) {
+        echo "Invalid age range.";
+    } else {
+        echo "Valid age: " . $age;
+    }
+}
+
+?>
+
+</body>
+</html>
+  
