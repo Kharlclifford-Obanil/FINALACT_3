@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Student Form</h2>
+
+<form action="process.php" method="POST">
+
+    <label>Name:</label><br>
+    <input type="text" name="name"><br><br>
+
+    <label>Email:</label><br>
+    <input type="text" name="email"><br><br>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+</body>
+</html>
+
