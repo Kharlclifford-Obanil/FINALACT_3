@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="post">
+    Email: <input type="text" name="email">
+    <input type="submit">
+</form>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $email = $_POST["email"] ?? "";
+
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "Valid email";
+    } else {
+        echo "Invalid email";
+    }
+}
+
+?>
+
+</body>
+</html>
