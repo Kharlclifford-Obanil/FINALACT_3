@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 9 - Textarea Input</title>
+</head>
+<body>
+
+<h2>Message Box</h2>
+
+<form method="POST">
+    <label>Enter your message:</label><br>
+    <textarea name="message" rows="5" cols="40" placeholder="Type something here..."></textarea><br><br>
+    
+    <button type="submit">Submit</button>
+</form>
+
+<hr>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $message = $_POST["message"];
+
+    if (empty($message)) {
+        echo "Please enter a message.";
+    } else {
+        echo "<h3>Your Message:</h3>";
+        echo "<p>" . htmlspecialchars($message) . "</p>";
+    }
+}
+?>
+
+</body>
+</html>
