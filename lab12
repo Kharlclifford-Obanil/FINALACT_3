@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="POST">
+
+    <label>Name:</label><br>
+    <input type="text" name="name"
+        value="<?php echo htmlspecialchars($_POST['name'] ?? ''); ?>"><br><br>
+
+    <label>Email:</label><br>
+    <input type="text" name="email"
+        value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>"><br><br>
+
+    <label>Message:</label><br>
+    <textarea name="message" rows="5" cols="30"><?php
+        echo htmlspecialchars($_POST['message'] ?? '');
+    ?></textarea><br><br>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+<hr>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $name = htmlspecialchars($_POST["name"] ?? "");
+    $email = htmlspecialchars($_POST["email"] ?? "");
+    $message = htmlspecialchars($_POST["message"] ?? "");
+
+    if (empty($name) || empty($email) || empty($message)) {
+        echo "Please fill up all requirements.";
+    } else {
+        echo "<h3>Submitted Data</h3>";
+        echo "Name: $name <br>";
+        echo "Email: $email <br>";
+        echo "Message: $message <br>";
+    }
+}
+?>
+
+</body>
+</html>
