@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="POST">
+
+    <label>Username:</label><br>
+    <input type="text" name="username"><br><br>
+
+    <label>Password:</label><br>
+    <input type="password" name="password"><br><br>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+<hr>
+
+<?php
+
+$correct_username = "admin";
+$correct_password = "pass+2!6";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $username = htmlspecialchars($_POST["username"] ?? "");
+    $password = $_POST["password"] ?? "";
+
+    if (empty($username) || empty($password)) {
+
+        echo "Please fill in all fields.";
+
+    } else {
+
+        if ($username == $correct_username && $password == $correct_password) {
+
+            echo "<h3>Login Successful</h3>";
+            echo "Welcome, " . $username;
+
+        } else {
+
+            echo "<h3>Invalid Username or Password</h3>";
+
+        }
+    }
+}
+?>
+
+</body>
+</html>
