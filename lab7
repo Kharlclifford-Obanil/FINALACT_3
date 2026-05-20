@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="post">
+    Male <input type="radio" name="gender" value="Male">
+    Female <input type="radio" name="gender" value="Female">
+    <div><input type="submit"></div>
+</form>
+
+<?php
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    echo $_POST["gender"];
+}
+
+?>
+
+</body>
+</html>
