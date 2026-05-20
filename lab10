@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Student Information Form</h2>
+
+<form method="POST">
+
+    <label>Name:</label><br>
+    <input type="text" name="name"><br><br>
+
+    <label>Email:</label><br>
+    <input type="text" name="email"><br><br>
+
+    <label>Gender:</label><br>
+    <input type="radio" name="gender" value="Male"> Male
+    <input type="radio" name="gender" value="Female"> Female<br><br>
+
+    <label>Course:</label><br>
+    <select name="course">
+        <option value="">--Select Course--</option>
+        <option value="BSIT">BSIT</option>
+        <option value="BSCS">BSCS</option>
+        <option value="BSIS">BSIS</option>
+        <option value="BSEMC">BSEMC</option>
+    </select><br><br>
+
+    <label>Message:</label><br>
+    <textarea name="message" rows="5" cols="30"></textarea><br><br>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+<hr>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // Sanitize inputs
+    $name = trim(htmlspecialchars($_POST["name"] ?? ""));
+    $email = trim(htmlspecialchars($_POST["email"] ?? ""));
+    $gender = $_POST["gender"] ?? "";
+    $course = $_POST["course"] ?? "";
+    $message = trim(htmlspecialchars($_POST["message"] ?? ""));
+
+    $errors = [];
+
+    // Validation
+    if (empty($name)) {  
+        $errors[] = "Name is required.";
+    }
+
+    if (empty($email)) {
+        $errors[] = "Email is required.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Invalid email format.";
+    }
+
+    if (empty($gender)) {
+        $errors[] = "Gender is required.";
+    }
+
+    if (empty($course)) {
+        $errors[] = "Please select a course.";
+    }
+
+    if (empty($message)) {
+        $errors[] = "Message is required.";
+    }
+
+    // Output
+    if (!empty($errors)) {
+        echo "<h3 style='color:red;'>Errors:</h3>";
+        foreach ($errors as $err) {
+            echo "<p>• $err</p>";
+        }
+    } else {
+        echo "<h3>Submitted Information</h3>";
+        echo "<p><b>Name:</b> $name</p>";
+        echo "<p><b>Email:</b> $email</p>";
+        echo "<p><b>Gender:</b> $gender</p>";
+        echo "<p><b>Course:</b> $course</p>";
+        echo "<p><b>Message:</b> $message</p>";
+    }
+}
+?>
+
+</body>
+</html>
