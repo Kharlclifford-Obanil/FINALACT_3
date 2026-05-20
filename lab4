@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="post">
+    Name: <input type="text" name="name"><br><br>
+    Email: <input type="text" name="email"><br><br>
+    <input type="submit">
+</form>
+
+<?php
+
+$error = "";
+$name = "";
+$email = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST["name"])) {
+        $error .= "Name is required.<br>";
+    } else {
+        $name = $_POST["name"];
+    }
+    if (empty($_POST["email"])) {
+        $error .= "Email is required.<br>";
+    } else {
+        $email = $_POST["email"];
+    }
+    if (empty($error)) {
+        echo "Name: " . $name . "<br>";
+        echo "Email: " . $email;
+        exit;
+    }
+}
+
+?>
+
+<?php
+if (!empty($error)) {
+    echo $error;
+}
+?>
+
+</body>
+</html>
