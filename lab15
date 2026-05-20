@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="POST">
+
+    <label>Name:</label><br>
+    <input type="text" name="name"><br><br>
+
+    <label>Email:</label><br>
+    <input type="text" name="email"><br><br>
+
+    <label>Course:</label><br>
+    <select name="course">
+        <option value="BSIT">BSIT</option>
+        <option value="BSCS">BSCS</option>
+        <option value="BSOA">BSOA</option>
+    </select><br><br>
+
+    <button type="submit">Submit</button>
+
+    <input type="reset" value="Reset">
+
+</form>
+
+<hr>
+
+<?php
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $name = htmlspecialchars($_POST["name"] ?? "");
+    $email = htmlspecialchars($_POST["email"] ?? "");
+    $course = htmlspecialchars($_POST["course"] ?? "");
+
+    echo "<h3>Submitted Information</h3>";
+    echo "Name: " . $name . "<br>";
+    echo "Email: " . $email . "<br>";
+    echo "Course: " . $course;
+}
+?>
+
+</body>
+</html>
