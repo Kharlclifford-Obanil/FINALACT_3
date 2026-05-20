@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="post">
+    Name: <input type="text" name="name"><br><br>
+    Email: <input type="text" name="email"><br><br>
+    <input type="submit">
+</form>
+
+<?php
+echo htmlspecialchars($_POST["name"] ?? "") . "<br>";
+echo htmlspecialchars($_POST["email"] ?? "");
+?>
+
+
+</body>
